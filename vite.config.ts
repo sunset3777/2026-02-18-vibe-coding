@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/2026-02-18-vibe-coding/', // For GitHub Pages deployment
+  base: process.env.BASE_URL || '/', // Controlled by environment variable for dual deployment
   plugins: [react()],
 });
