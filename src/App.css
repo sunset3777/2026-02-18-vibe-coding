@@ -85,11 +85,27 @@ button:focus-visible {
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.9);
 }
 
+button:disabled {
+  background-color: #004444; /* Darker cyan for disabled */
+  color: #008888; /* Muted text for disabled */
+  border-color: #006666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Quiz specific styles */
 .quiz-container {
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+}
+
+.language-toggle-container {
+  margin-bottom: 1.5em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 }
 
 .question-text {
@@ -133,6 +149,21 @@ button:focus-visible {
   color: #00ff00; /* Green for positive result */
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
   margin-bottom: 0.5em;
+}
+
+.react-recommendation {
+  color: #61dafb; /* React blue */
+  text-shadow: 0 0 10px rgba(97, 218, 251, 0.7);
+}
+
+.vue-recommendation {
+  color: #42b883; /* Vue green */
+  text-shadow: 0 0 10px rgba(66, 184, 131, 0.7);
+}
+
+.equal-recommendation {
+  color: #ffaa00; /* Orange for neutral */
+  text-shadow: 0 0 10px rgba(255, 170, 0, 0.7);
 }
 
 .result-score {

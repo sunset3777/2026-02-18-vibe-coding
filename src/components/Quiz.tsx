@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '../data/questions';
-import type { Option, Question } from '../data/questions';
+import type { Option, Question } from '../data/questions'; // Still need these types
+import { useI18n } from '../i18n/useI18n';
 
 type Answer = {
   questionId: number;
-  chosenLabel: string;
+  chosenLabel: string; // This will store the label in the language it was chosen
   reasonKey: string;
   score: { react: number; vue: number };
 };
@@ -17,6 +18,8 @@ const Quiz: React.FC = () => {
   const [vueScore, setVueScore] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [showResult, setShowResult] = useState(false);
+
+  const { lang, setLang, t } = useI18n();
 
   const totalQuestions = questions.length;
   const progress = (currentQuestionIndex / totalQuestions) * 100;
@@ -37,7 +40,7 @@ const Quiz: React.FC = () => {
       ...prevAnswers,
       {
         questionId: question.id,
-        chosenLabel: selectedOption.label,
+        chosenLabel: selectedOption.label[lang], // Store the chosen label in the current language
         reasonKey: selectedOption.reasonKey,
         score: selectedOption.score,
       },
@@ -51,16 +54,17 @@ const Quiz: React.FC = () => {
   };
 
   const renderResult = () => {
-    let recommendation = '';
-    let recommendationClass = '';
+    let recommendationText: string;
+    let recommendationClass: string;
+
     if (reactScore > vueScore) {
-      recommendation = 'React';
+      recommendationText = t('suitedForReact');
       recommendationClass = 'react-recommendation';
     } else if (vueScore > reactScore) {
-      recommendation = 'Vue';
+      recommendationText = t('suitedForVue');
       recommendationClass = 'vue-recommendation';
     } else {
-      recommendation = 'React and Vue (equally)';
+      recommendationText = t('equallySuited');
       recommendationClass = 'equal-recommendation';
     }
 
@@ -72,24 +76,33 @@ const Quiz: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="result-container"
       >
-        <h1>Quiz Result</h1>
-        <h2 className={recommendationClass}>You are more suited for {recommendation}!</h2>
+        <div className="language-toggle-container">
+          <button onClick={() => setLang('zh-Hant')} disabled={lang === 'zh-Hant'}>
+            繁體中文
+          </button>
+          <button onClick={() => setLang('en')} disabled={lang === 'en'}>
+            English
+          </button>
+        </div>
+
+        <h1>{t('resultTitle')}</h1>
+        <h2 className={recommendationClass}>{recommendationText}</h2>
         <p className="result-score">
-          React Score: {reactScore} / {totalQuestions}
+          {t('reactScore')}: {reactScore} {t('of')} {totalQuestions}
         </p>
         <p className="result-score">
-          Vue Score: {vueScore} / {totalQuestions}
+          {t('vueScore')}: {vueScore} {t('of')} {totalQuestions}
         </p>
 
-        <h3>Answers Review</h3>
+        <h3>{t('answersReview')}</h3>
         <ul className="answers-list">
           {answers.map((a) => (
             <li key={a.questionId}>
-              Q{a.questionId}: {a.chosenLabel}
+              {t('questionPrefix')} {a.questionId}: {a.chosenLabel}
             </li>
           ))}
         </ul>
-        <button onClick={restartQuiz}>Restart Quiz</button>
+        <button onClick={restartQuiz}>{t('restartQuiz')}</button>
       </motion.div>
     );
   };
@@ -98,6 +111,15 @@ const Quiz: React.FC = () => {
 
   return (
     <div className="quiz-container">
+      <div className="language-toggle-container">
+        <button onClick={() => setLang('zh-Hant')} disabled={lang === 'zh-Hant'}>
+          繁體中文
+        </button>
+        <button onClick={() => setLang('en')} disabled={lang === 'en'}>
+          English
+        </button>
+      </div>
+
       <AnimatePresence mode="wait">
         {!showResult ? (
           <motion.div
@@ -108,20 +130,23 @@ const Quiz: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <h1>
-              Question {currentQuestion.id} / {totalQuestions}
+              {t('questionPrefix')} {currentQuestion.id} {t('of')} {totalQuestions}
+              {t('questionSuffix')}
             </h1>
-            <p className="question-text">{currentQuestion.text}</p>
+            <p className="question-text">{currentQuestion.text[lang]}</p>
             <div className="options-container">
               {currentQuestion.options.map((option, index) => (
                 <button key={index} onClick={() => handleAnswer(currentQuestion, option)}>
-                  {option.label}
+                  {option.label[lang]}
                 </button>
               ))}
             </div>
             <div className="progress-bar-container">
               <div className="progress-bar-fill" style={{ width: `${progress}%` }}></div>
             </div>
-            <p>Progress: {Math.round(progress)}%</p>
+            <p>
+              {t('progress')}: {Math.round(progress)}%
+            </p>
           </motion.div>
         ) : (
           renderResult()
