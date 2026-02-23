@@ -13,7 +13,8 @@ export type Question = {
   options: [Option, Option];
 };
 
-export const questions: Question[] = [
+export const allQuestions: Question[] = [
+  // Renamed to allQuestions
   {
     id: 1,
     text: {
@@ -208,6 +209,177 @@ export const questions: Question[] = [
         },
         score: { react: 0, vue: 1 },
         reasonKey: 'vue_scoped_css',
+      },
+    ],
+  },
+  // New questions starting from here (total 16 for now)
+  {
+    id: 9,
+    text: {
+      'zh-Hant': '您喜歡在開發時有更多的自由度，還是更喜歡內建的約定？',
+      en: 'Do you prefer more freedom during development or built-in conventions?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': '更多的自由度', en: 'More freedom' },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_freedom',
+      },
+      {
+        label: { 'zh-Hant': '內建的約定', en: 'Built-in conventions' },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_conventions',
+      },
+    ],
+  },
+  {
+    id: 10,
+    text: {
+      'zh-Hant': '您對於模板語法和邏輯分離的偏好是什麼？',
+      en: 'What is your preference for template syntax and logic separation?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': 'JS/TS 中的模板（JSX/TSX）', en: 'Templates in JS/TS (JSX/TSX)' },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_template_js',
+      },
+      {
+        label: {
+          'zh-Hant': '獨立的 HTML 模板和 JS 邏輯',
+          en: 'Separate HTML templates and JS logic',
+        },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_template_html',
+      },
+    ],
+  },
+  {
+    id: 11,
+    text: {
+      'zh-Hant': '您在選擇解決方案時，更看重其成熟度和市場佔有率，還是其新穎性和技術前瞻性？',
+      en: 'When choosing a solution, do you value maturity and market share more, or novelty and technological foresight?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': '成熟度和市場佔有率', en: 'Maturity and market share' },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_maturity',
+      },
+      {
+        label: { 'zh-Hant': '新穎性和技術前瞻性', en: 'Novelty and technological foresight' },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_novelty',
+      },
+    ],
+  },
+  {
+    id: 12,
+    text: {
+      'zh-Hant': '您對於工具鏈的自動化程度有何偏好？',
+      en: 'What is your preference for the level of automation in the tooling ecosystem?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': '高自動化，內建配置', en: 'Highly automated, built-in configurations' },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_automation',
+      },
+      {
+        label: {
+          'zh-Hant': '較少自動化，更多手動配置空間',
+          en: 'Less automated, more manual configuration',
+        },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_manual_config',
+      },
+    ],
+  },
+  {
+    id: 13,
+    text: {
+      'zh-Hant': '您更喜歡由一家公司主導的專案，還是由社區驅動的專案？',
+      en: 'Do you prefer a project led by a single company or a community-driven project?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': '社區驅動', en: 'Community-driven' },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_community_driven',
+      },
+      {
+        label: { 'zh-Hant': '公司主導', en: 'Company-led' },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_company_led',
+      },
+    ],
+  },
+  {
+    id: 14,
+    text: {
+      'zh-Hant': '對於響應式設計，您傾向於使用基於屬性的解決方案，還是更喜歡 CSS 預處理器？',
+      en: 'For responsive design, do you lean towards property-based solutions or prefer CSS preprocessors?',
+    },
+    options: [
+      {
+        label: {
+          'zh-Hant': '基於屬性（如 Tailwind CSS）',
+          en: 'Property-based (e.g., Tailwind CSS)',
+        },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_tailwind',
+      },
+      {
+        label: {
+          'zh-Hant': 'CSS 預處理器（如 SASS, LESS）',
+          en: 'CSS preprocessors (e.g., SASS, LESS)',
+        },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_preprocessors',
+      },
+    ],
+  },
+  {
+    id: 15,
+    text: {
+      'zh-Hant': '您對於抽象化層級的偏好是什麼？',
+      en: 'What is your preference for the level of abstraction?',
+    },
+    options: [
+      {
+        label: {
+          'zh-Hant': '較低的抽象化，更多底層控制',
+          en: 'Lower abstraction, more low-level control',
+        },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_low_abstraction',
+      },
+      {
+        label: {
+          'zh-Hant': '較高的抽象化，更多開箱即用的功能',
+          en: 'Higher abstraction, more out-of-the-box features',
+        },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_high_abstraction',
+      },
+    ],
+  },
+  {
+    id: 16,
+    text: {
+      'zh-Hant': '您喜歡在大型應用程式中使用單一入口點，還是更喜歡模組化的、可組合的組件？',
+      en: 'Do you prefer a single entry point for large applications or a modular, composable component approach?',
+    },
+    options: [
+      {
+        label: { 'zh-Hant': '模組化的、可組合的組件', en: 'Modular, composable components' },
+        score: { react: 1, vue: 0 },
+        reasonKey: 'react_modular',
+      },
+      {
+        label: { 'zh-Hant': '單一入口點，整體性強', en: 'Single entry point, strong integrity' },
+        score: { react: 0, vue: 1 },
+        reasonKey: 'vue_single_entry',
       },
     ],
   },

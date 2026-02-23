@@ -102,10 +102,17 @@ button:disabled {
 }
 
 .language-toggle-container {
-  margin-bottom: 1.5em;
+  position: fixed;
+  top: 1em;
+  right: 1em;
   display: flex;
-  justify-content: center;
-  gap: 1em;
+  gap: 0.5em;
+  z-index: 1000; /* Ensure it stays on top */
+  margin: 0; /* Remove previous margin */
+  background-color: rgba(26, 26, 26, 0.8); /* Slightly transparent background */
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
 }
 
 .question-text {
